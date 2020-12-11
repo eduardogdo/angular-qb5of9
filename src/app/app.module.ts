@@ -9,10 +9,12 @@ import { ProductListComponent } from "./product-list/product-list.component";
 import { ProductAlertsComponent } from "./product-alerts/product-alerts.component";
 import { EventsService } from "./events.service";
 import { GlobalErrorHandleService } from "./global-error-handle.service";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   imports: [
     BrowserModule,
+    HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot([{ path: "", component: ProductListComponent }])
   ],
