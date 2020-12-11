@@ -1,0 +1,36 @@
+<h2 *ngIf="products">Products</h2>
+
+<div class="row" *ngFor="let product of products">
+	<div class="col-3">
+		<img [src]="product.img" class="img-thumbnail"/>
+  </div>
+		<div class="col-9">
+			<h3>
+				<a [title]="product.name + ' details'">
+					{{ product.name }}
+				</a>
+				<p>Price: {{(product.price / 100) | currency:product.currency}}</p>
+				<p *ngIf="product.description">
+					Description: {{ product.description }}
+				</p>
+				<button (click)="share(product)">
+      Seleccionar
+    </button>
+				<app-product-alerts [product]="product" (notify)="onNotify()">
+				</app-product-alerts>
+			</h3>
+		</div>
+
+
+	</div>
+
+	<div class="row alig-items-center" *ngIf="!products">
+		<div class="col">
+			<div class="lds-ring">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
