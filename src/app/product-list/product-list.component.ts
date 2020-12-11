@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, ElementRef } from "@angular/core";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit
+} from "@angular/core";
 import { EventsService } from "../events.service";
 
 import { products, stores } from "../products";
@@ -8,15 +14,17 @@ import { products, stores } from "../products";
   templateUrl: "./product-list.component.html",
   styleUrls: ["./product-list.component.css"]
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
   store: any;
   products: any;
   appNativeData: any;
+  token: string;
 
   constructor(
     private elementRef: ElementRef,
     private cd: ChangeDetectorRef,
-    private eventSrv: EventsService
+    private eventSrv: EventsService,
+    private http: HttpClient
   ) {
     const self = this;
     window.setAppData = function(data) {
@@ -35,11 +43,16 @@ export class ProductListComponent {
     };
   }
 
-  ngAfterViewInit() {
-    const token =
-      "Vk5eWlFGY5P-Fy2HVsSajBx6wmFB92HVrzYFSs5MzE98qc-rfFJzM6WbgeOuoGNKF_h1MnQSkir60DQgWJDHzFBjoK2n0_HRZ1WR5nDVKGzzymY8tCaQMFufQOUG7YRa91lCaT9OkPLFcaihmNCD2gdSchXdPH9kgqi4yOlydbsHWuO-CMvTUWNlBo3I40rEjpkIVOJ_yqUQDleUx5NvsaS4tjRrySOljEYI6TUQf7DmMiZU5OIWrwK8uQ4jqwTjIFfyS3zQfasJv9htwTvGDyBuRf3HNEsys5R_Dzw3QPYn5C3tuluP3_IlPcpJeBG7hNzu7w";
-    window.interface.onPageLoad(token);
+  ngOnInit(): void {
+    const model = {
+      client_id: "B3ATvqt770yzOyW7Hq24vQ",
+      client_secret: "jznBKgcgYUWNhbCGmzOlkA",
+      company_code: "0190383989001"
+    };
+    this.getToken(model);
   }
+
+  ngAfterViewInit() {}
 
   share(product: any) {
     //window.alert("The product has been shared!");
@@ -47,12 +60,39 @@ export class ProductListComponent {
       product.id,
       product.price, //entero
       product.name,
-      product.currency //ISO Code eje. USD
+      product.currency, //ISO Code eje. USD
+      this.token
     );
   }
 
   onNotify() {
     window.alert("You will be notified when the product goes on sale");
+  }
+
+  getToken(model: any) {
+    model.grant_type = "client_credentials";
+    model.type = 2;
+    let params = this.toHttpParams(model);
+
+    let headers = new HttpHeaders({
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Accept-Language": "es"
+    });
+    return this.http
+      .post<any>(`https://pay-102.azurewebsites.net/token`, params, {
+        headers: headers
+      })
+      .subscribe((resp: any) => {
+        this.token = resp.access_token;
+        window.interface.onPageLoad(this.token);
+      });
+  }
+
+  protected toHttpParams(params) {
+    return Object.getOwnPropertyNames(params).reduce(
+      (p, key) => p.set(key, params[key]),
+      new HttpParams()
+    );
   }
 }
 
