@@ -19,7 +19,7 @@ export const products = [
 export const stores = [
   {
     name: "Dispensadora 1",
-    id: "21ade541-e484-416f-8d7f-e53b533ee39f",
+    id: "54680a93-5977-4b21-b077-c14b4a370854",
     products: [
       {
         id: "sku123",
