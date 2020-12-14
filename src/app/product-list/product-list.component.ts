@@ -79,7 +79,7 @@ export class ProductListComponent implements OnInit {
       "Accept-Language": "es"
     });
     return this.http
-      .post<any>(`https://pay-102.azurewebsites.net/token`, params, {
+      .post<any>(`https://payphone-pay2.azurewebsites.net/token`, params, {
         headers: headers
       })
       .subscribe((resp: any) => {
