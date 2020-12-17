@@ -43,7 +43,7 @@ can be found in the LICENSE file at https://angular.io/license
 
 declare global {
   interface Window {
-    setAppData(storeId);
+    setAppData(storeId: any);
     interface: any;
   }
 }
