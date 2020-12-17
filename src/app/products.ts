@@ -98,6 +98,47 @@ export const stores = [
         img: "https://receta.land/images/1591491334.jpeg"
       }
     ]
+  },
+  {
+    name: "Dispensadora 3",
+    id: "21265b7b-2d9a-4547-abc6-f4b62fa2a4c9",
+    products: [
+      {
+        id: "sku123",
+        name: "Capuchino",
+        price: 230,
+        currency: "USD",
+        description: "Excelente cafe para las mañanas",
+        img:
+          "https://cope-cdnmed.agilecontent.com/resources/jpg/8/3/1592990775238.jpg"
+      },
+      {
+        id: "sku124",
+        name: "Capuchino con vainilla",
+        price: 350,
+        currency: "NIO",
+        description: "Excelente cafe para las mañanas",
+        img:
+          "https://www.vips.com.mx/img/2019/platillosdic/bebidas-capuccino-vainilla.png"
+      },
+      {
+        id: "sku125",
+        name: "Expreso",
+        price: 150,
+        currency: "EUR",
+        description: "Excelente cafe para las mañanas",
+        img:
+          "https://dam.cocinafacil.com.mx/wp-content/uploads/2013/04/cafe-espresso.jpg"
+      },
+      {
+        id: "sku125",
+        name: "Cafe Americano",
+        price: 175,
+        currency: "",
+        description: "Excelente cafe para las mañanas",
+        img: "https://receta.land/images/1591491334.jpeg"
+      }
+    ]
   }
 ];
 
